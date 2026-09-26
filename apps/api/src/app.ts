@@ -1,6 +1,7 @@
 import cors from "cors";
 import express, { type Request, type Response } from "express";
 import { z } from "zod";
+import { loadAtlas } from "./atlas.js";
 import {
   createSession,
   createUser,
@@ -218,6 +219,15 @@ export function createApp() {
         dataCoverage: 61
       }
     });
+  });
+
+  app.get("/api/atlas", requireAuth, async (_req, res) => {
+    try {
+      res.json(await loadAtlas());
+    } catch (error) {
+      console.error("Could not load atlas catalog", error);
+      res.status(500).json({ message: "Could not load atlas catalog" });
+    }
   });
 
   return app;

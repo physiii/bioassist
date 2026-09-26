@@ -6,7 +6,12 @@ This roadmap is grounded in:
 - `docs/bioassist_platform_blueprint_v1.pdf`
 - `docs/bioassist_platform_blueprint_v2_2_detailed.pdf`
 - `docs/comprehensive_health_playbook_v5_with_measurement_atlas.pdf`
+- `docs/Health_Atlas_Research_Suite_Complete_2026/` (19-volume unified taxonomy, domain, measurement, and engineering suite)
 - UI/login patterns from `needl` and `MovieTime`
+
+The source-backed atlas catalog, data contracts, hardware boundaries, and updated implementation sequence live in
+`docs/ATLAS_IMPLEMENTATION_BLUEPRINT.md`. The application exposes the current catalog at `/atlas` rather than
+duplicating its branch, source, and skill registries in UI code.
 
 ## Product Direction (What We Are Building)
 
@@ -245,4 +250,3 @@ Rules:
 - Coverage growth: week-over-week increase in measured key signals.
 - Action adoption: accepted recommendations and completion rate.
 - Trust: export usage, low inaccuracy complaints, confidence feedback quality.
-

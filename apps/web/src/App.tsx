@@ -1,17 +1,10 @@
 import { Box, CircularProgress } from "@mui/material";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { appRoutes } from "./appRoutes";
 import { useAuth } from "./auth/AuthContext";
 import { AppShell } from "./components/AppShell";
-import { DevicesPage } from "./pages/DevicesPage";
-import { DocumentsPage } from "./pages/DocumentsPage";
-import { HomePage } from "./pages/HomePage";
-import { InsightsPage } from "./pages/InsightsPage";
-import { LearnPage } from "./pages/LearnPage";
 import { LoginPage } from "./pages/LoginPage";
 import { OnboardingPage } from "./pages/OnboardingPage";
-import { PlanPage } from "./pages/PlanPage";
-import { SettingsPage } from "./pages/SettingsPage";
-import { TimelinePage } from "./pages/TimelinePage";
 
 function FullscreenLoader() {
   return (
@@ -31,14 +24,9 @@ export default function App() {
   return (
     <Routes>
       <Route element={<AppShell />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/timeline" element={<TimelinePage />} />
-        <Route path="/insights" element={<InsightsPage />} />
-        <Route path="/plan" element={<PlanPage />} />
-        <Route path="/documents" element={<DocumentsPage />} />
-        <Route path="/devices" element={<DevicesPage />} />
-        <Route path="/learn" element={<LearnPage />} />
-        <Route path="/settings" element={<SettingsPage />} />
+        {appRoutes.map((route) => (
+          <Route key={route.path} path={route.path} element={route.element} />
+        ))}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>

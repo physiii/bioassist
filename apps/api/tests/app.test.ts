@@ -52,4 +52,38 @@ describe("BioAssist API", () => {
     expect(login.status).toBe(200);
     expect(login.body.user.onboarded).toBe(true);
   });
+
+  it("serves the verified atlas and discovered skill catalog to authenticated users", async () => {
+    const unauthorized = await request(app).get("/api/atlas");
+    expect(unauthorized.status).toBe(401);
+
+    const signup = await request(app).post("/api/auth/signup").send({
+      name: "Atlas Tester",
+      email: "atlas@example.com",
+      password: "pass12345"
+    });
+    const response = await request(app)
+      .get("/api/atlas")
+      .set("Authorization", `Bearer ${signup.body.token as string}`);
+
+    expect(response.status).toBe(200);
+    expect(response.body.stats).toMatchObject({
+      sourceCount: 19,
+      declaredSourceCount: 19,
+      pageCount: 1494,
+      branchCount: 15,
+      deepBranchCount: 4,
+      axisCount: 9,
+      skillCount: 6
+    });
+    expect(response.body.integrity.ok).toBe(true);
+    expect(response.body.integrity.duplicatesIgnored).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ path: "docs/Cardiovascular_Health_and_Measurement_Engineering_2026.pdf" })
+      ])
+    );
+    expect(response.body.sources.every((source: { checksumStatus: string }) => source.checksumStatus === "verified")).toBe(true);
+    expect(response.body.branches.find((branch: { id: string }) => branch.id === "organ-systems").sourceCodes).toHaveLength(16);
+    expect(response.body.skills.map((skill: { name: string }) => skill.name)).toContain("measurement-quality");
+  });
 });

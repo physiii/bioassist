@@ -1,0 +1,539 @@
+{
+  "schemaVersion": 1,
+  "atlasVersion": "2026-08-13",
+  "title": "Health Atlas Research Suite",
+  "description": "A source-backed map from whole-person outcomes through biology, context, measurement, intervention, and governance.",
+  "safetyNotice": "BioAssist organizes observations, evidence, research, and measurement plans. It does not diagnose, prescribe, or authorize experimental devices for human use.",
+  "principles": [
+    {
+      "id": "profile-not-score",
+      "title": "Profile, not one score",
+      "description": "Show domain state, trajectory, confidence, and trade-offs instead of hiding them in a universal health score."
+    },
+    {
+      "id": "state-not-signal",
+      "title": "State is not signal",
+      "description": "Keep latent health state separate from noisy observations, device outputs, and algorithmic inferences."
+    },
+    {
+      "id": "provenance-first",
+      "title": "Provenance is part of the value",
+      "description": "Retain source, time, method, units, context, quality, uncertainty, and transformation lineage."
+    },
+    {
+      "id": "decision-linked",
+      "title": "Measure for a decision",
+      "description": "Collect a signal only when its intended use, reference, interpretation boundary, and next action are explicit."
+    },
+    {
+      "id": "person-in-context",
+      "title": "Reassemble the whole person",
+      "description": "Connect biology to symptoms, function, goals, exposures, care burden, environment, and life course."
+    }
+  ],
+  "pipeline": [
+    {
+      "id": "collect",
+      "label": "Collect",
+      "description": "Documents, self-report, clinical data, devices, environment, and research instruments.",
+      "output": "Source event"
+    },
+    {
+      "id": "validate",
+      "label": "Validate",
+      "description": "Identity, consent, calibration, artifacts, completeness, units, timing, and reference checks.",
+      "output": "Quality envelope"
+    },
+    {
+      "id": "normalize",
+      "label": "Normalize",
+      "description": "Canonical concepts, units, temporal semantics, missingness reasons, and terminology mappings.",
+      "output": "Health observation"
+    },
+    {
+      "id": "connect",
+      "label": "Connect",
+      "description": "Attach observations to the fifteen branches, nine axes, episodes, goals, and causal relationships.",
+      "output": "Health-coordinate graph"
+    },
+    {
+      "id": "interpret",
+      "label": "Interpret",
+      "description": "Separate within-person change, population abnormality, clinical importance, diagnostic pattern, and causal inference.",
+      "output": "Versioned insight"
+    },
+    {
+      "id": "act",
+      "label": "Act",
+      "description": "Present evidence, alternatives, risks, burden, decision owner, and escalation boundary.",
+      "output": "Goal-linked plan"
+    },
+    {
+      "id": "remeasure",
+      "label": "Re-measure",
+      "description": "Evaluate response, harm, adherence, function, uncertainty, and whether the decision changed.",
+      "output": "Updated trajectory"
+    }
+  ],
+  "axes": [
+    { "id": "domain", "code": "D", "label": "Domain or target", "prompt": "What is affected?" },
+    { "id": "scale", "code": "L", "label": "Scale or level", "prompt": "At what level, from molecule to ecosystem?" },
+    { "id": "mechanism", "code": "M", "label": "Mechanism or process", "prompt": "How might it arise or propagate?" },
+    { "id": "time", "code": "T", "label": "Time and life course", "prompt": "What is the onset, course, recurrence, and life-stage context?" },
+    { "id": "determinants", "code": "X", "label": "Determinants and exposures", "prompt": "Which susceptibilities, resources, behaviors, and environments matter?" },
+    { "id": "function", "code": "F", "label": "Function and lived outcome", "prompt": "What changes in symptoms, capacity, participation, quality of life, or survival?" },
+    { "id": "context", "code": "C", "label": "Context and population", "prompt": "For whom, where, and under which conditions?" },
+    { "id": "evidence", "code": "E", "label": "Measurement and evidence", "prompt": "How was it observed, with what quality, reference, and uncertainty?" },
+    { "id": "intervention", "code": "I", "label": "Intervention and governance", "prompt": "What can change it, who decides, and who is accountable?" }
+  ],
+  "profileLayers": [
+    { "id": "identity-context", "label": "Identity and context", "description": "Relevant demographics, language, accessibility, relationships, occupation, geography, and consent." },
+    { "id": "whole-person-state", "label": "Whole-person state", "description": "Symptoms, function, participation, well-being, safety, vital risk, and goals." },
+    { "id": "biological-state", "label": "Physiological and biological state", "description": "Organ systems, laboratory values, imaging, waveforms, molecular, and genetic data." },
+    { "id": "mechanisms", "label": "Mechanisms and causal graph", "description": "Known and hypothesized pathways with confidence and competing explanations." },
+    { "id": "life-course", "label": "Life-course and exposure timeline", "description": "Development, reproduction, infection, injury, behavior, work, environment, and treatment." },
+    { "id": "interventions", "label": "Intervention and medication graph", "description": "What is being done, why, adherence, response, burden, interaction, and harm." },
+    { "id": "care-system", "label": "Care-system map", "description": "Responsible people, transitions, appointments, resources, barriers, and escalation." },
+    { "id": "next-information", "label": "Uncertainty and next information", "description": "Unresolved questions and measurements most likely to change a decision." }
+  ],
+  "branchGroups": [
+    { "id": "outcomes", "label": "Whole-person outcomes", "description": "The state and goals the rest of the system should explain and improve." },
+    { "id": "biology", "label": "Biological and clinical", "description": "Foundations, organ systems, cross-system processes, and host biology." },
+    { "id": "experience", "label": "Mind, development, and experience", "description": "Cognition, behavior, relationships, function, development, and participation." },
+    { "id": "context", "label": "Context and population", "description": "Environment, population patterns, prevention, and public health." },
+    { "id": "action", "label": "Knowledge and action systems", "description": "Care delivery, data, evidence, interventions, rights, and governance." }
+  ],
+  "branches": [
+    {
+      "id": "whole-person",
+      "index": 1,
+      "label": "Whole-person health states and outcomes",
+      "groupId": "outcomes",
+      "coverage": "deep",
+      "summary": "Integrates risk, symptoms, function, participation, well-being, resilience, safety, care burden, and person-defined goals.",
+      "sourceCodes": ["00", "01"],
+      "measurementFamilies": ["Longitudinal narrative", "Patient-reported outcomes", "Function and disability", "Wearable and ambient monitoring", "Goal attainment"],
+      "buildTargets": ["Whole-person trajectory view", "Goal and preference registry", "Burden and discordance detection"]
+    },
+    {
+      "id": "biological-foundations",
+      "index": 2,
+      "label": "Biological foundations and regulation",
+      "groupId": "biology",
+      "coverage": "deep",
+      "summary": "Connects molecular, genetic, cellular, tissue, signaling, metabolic, repair, and aging processes without treating omics as causality.",
+      "sourceCodes": ["00", "02"],
+      "measurementFamilies": ["Genomics and epigenomics", "Proteomics and metabolomics", "Cell and tissue assays", "Molecular imaging", "Perturbation experiments"],
+      "buildTargets": ["Specimen and assay lineage", "Cross-scale mechanism graph", "Variant and incidental-finding governance"]
+    },
+    {
+      "id": "organ-systems",
+      "index": 3,
+      "label": "Organ-system health",
+      "groupId": "biology",
+      "coverage": "deep",
+      "summary": "Fifteen deep packets connect organ physiology, disorders, clinical assessment, devices, engineering, intervention, and research roadmaps.",
+      "sourceCodes": ["00", "03A", "03B", "03C", "03D", "03E", "03F", "03G", "03H", "03I", "03J", "03K", "03L", "03M", "03N", "03O"],
+      "measurementFamilies": ["Electrical and electrophysiology", "Pressure, flow, and mechanics", "Optical and imaging", "Laboratory and specimen", "Functional and challenge testing"],
+      "buildTargets": ["System-specific measurement registries", "Cardiovascular first pilot", "Cross-organ interaction graph"]
+    },
+    {
+      "id": "pathological-processes",
+      "index": 4,
+      "label": "Cross-system pathological processes",
+      "groupId": "biology",
+      "coverage": "deep",
+      "summary": "Provides primary homes for inflammation, thrombosis, ischemia, fibrosis, cancer, toxicity, edema, degeneration, injury, and iatrogenic harm.",
+      "sourceCodes": ["00", "04"],
+      "measurementFamilies": ["Serial organ panels", "Inflammatory and endothelial markers", "Coagulation", "Integrated pathology", "Wearable deterioration sensing"],
+      "buildTargets": ["Mechanism-to-organ relationship graph", "Acute illness trajectory", "Mechanism-to-function outcomes"]
+    },
+    {
+      "id": "mind-behavior",
+      "index": 5,
+      "label": "Brain, cognition, emotion, and behavior",
+      "groupId": "experience",
+      "coverage": "master",
+      "summary": "Covers consciousness, perception, cognition, emotion, motivation, behavior, sleep, neurodevelopment, psychiatric spectra, and cognitive aging.",
+      "sourceCodes": ["00", "03C"],
+      "measurementFamilies": ["Structured interviews and scales", "Cognitive tasks", "EEG and imaging", "Sleep and passive sensing", "Function and participation"],
+      "buildTargets": ["State-aware symptom capture", "Cognitive and mood trajectories", "Privacy-preserving passive sensing"]
+    },
+    {
+      "id": "psychosocial",
+      "index": 6,
+      "label": "Psychosocial, relational, cultural, and existential health",
+      "groupId": "experience",
+      "coverage": "master",
+      "summary": "Represents relationships, loneliness, safety, roles, material conditions, culture, discrimination, displacement, digital life, meaning, and values.",
+      "sourceCodes": ["00", "01"],
+      "measurementFamilies": ["Self-report and interview", "Social network and support", "Material conditions", "Role participation", "Meaning and goals"],
+      "buildTargets": ["Context and resource timeline", "Sensitive-data controls", "Barrier-to-action modeling"]
+    },
+    {
+      "id": "life-course",
+      "index": 7,
+      "label": "Development, reproduction, aging, and the life course",
+      "groupId": "experience",
+      "coverage": "master",
+      "summary": "Links preconception, development, adulthood, reproductive transitions, aging, death, grief, and intergenerational effects.",
+      "sourceCodes": ["00", "03M", "03N", "03O"],
+      "measurementFamilies": ["Growth and milestones", "Reproductive and pregnancy measures", "Reserve and frailty", "Transitions and episodes", "Intergenerational history"],
+      "buildTargets": ["Life-stage-aware references", "Episode and transition model", "Pregnancy-specific validation context"]
+    },
+    {
+      "id": "infection-immunity",
+      "index": 8,
+      "label": "Infection, immunity, host-microbe biology, and biosecurity",
+      "groupId": "biology",
+      "coverage": "master",
+      "summary": "Connects host defense, microbial ecology, infection, transmission, vaccination, antimicrobial resistance, outbreaks, and immune-mediated disease.",
+      "sourceCodes": ["00", "03H", "04"],
+      "measurementFamilies": ["Microbiology and molecular testing", "Serology", "Immune phenotyping", "Exposure and surveillance", "Recovery and participation"],
+      "buildTargets": ["Host-pathogen timeline", "Immune-state challenge profile", "Post-acute outcome tracking"]
+    },
+    {
+      "id": "environment",
+      "index": 9,
+      "label": "Environmental, occupational, One Health, and planetary health",
+      "groupId": "context",
+      "coverage": "master",
+      "summary": "Represents physical, chemical, biological, built, occupational, climate, ecosystem, animal, food, water, and planetary determinants.",
+      "sourceCodes": ["00", "03B", "03J", "03O"],
+      "measurementFamilies": ["Air and water quality", "Temperature, humidity, light, and noise", "Occupational exposure", "Location and built environment", "Personal exposure sensors"],
+      "buildTargets": ["Privacy-minimized environment context", "Exposure event model", "Authoritative geospatial connectors"]
+    },
+    {
+      "id": "function-participation",
+      "index": 10,
+      "label": "Function, disability, rehabilitation, and participation",
+      "groupId": "experience",
+      "coverage": "master",
+      "summary": "Connects impairment to capacity, activity, participation, environment, assistive technology, rehabilitation, and rights.",
+      "sourceCodes": ["00", "01", "03I"],
+      "measurementFamilies": ["Performance tests", "Daily activity", "Participation", "Environmental barriers", "Assistive-device telemetry"],
+      "buildTargets": ["ICF-aligned function records", "Rehabilitation sensor stack", "Meaningful-change thresholds"]
+    },
+    {
+      "id": "population-health",
+      "index": 11,
+      "label": "Population health, prevention, and public health",
+      "groupId": "context",
+      "coverage": "master",
+      "summary": "Covers population distributions, surveillance, prevention, screening, community health, preparedness, burden, and inequity.",
+      "sourceCodes": ["00"],
+      "measurementFamilies": ["Rates and surveillance", "Coverage", "Burden and DALYs", "Inequity metrics", "Community priorities"],
+      "buildTargets": ["De-identified cohort views", "Coverage and equity monitoring", "Purpose-specific population dashboards"]
+    },
+    {
+      "id": "care-systems",
+      "index": 12,
+      "label": "Health care, professions, and delivery systems",
+      "groupId": "action",
+      "coverage": "master",
+      "summary": "Represents care settings, professions, coordination, continuity, safety, access, quality, workload, and financing.",
+      "sourceCodes": ["00", "01"],
+      "measurementFamilies": ["Utilization and process", "Continuity and handoffs", "Safety", "Experience and trust", "Coordination burden"],
+      "buildTargets": ["Care-team map", "Handoff and follow-up tracking", "Treatment-workload accounting"]
+    },
+    {
+      "id": "measurement-data",
+      "index": 13,
+      "label": "Measurement, evidence, data, and informatics",
+      "groupId": "action",
+      "coverage": "master",
+      "summary": "Holds metrology, evidence, uncertainty, provenance, interoperability, algorithms, data quality, causal inference, and knowledge representation.",
+      "sourceCodes": ["00", "01", "02", "03A", "03B", "03C", "03D", "03E", "03F", "03G", "03H", "03I", "03J", "03K", "03L", "03M", "03N", "03O", "04"],
+      "measurementFamilies": ["Calibration and validity", "Provenance and lineage", "Terminology and interoperability", "Algorithms and models", "Uncertainty and missingness"],
+      "buildTargets": ["Observation envelope", "Measurement registry", "Claims and evidence ledger"]
+    },
+    {
+      "id": "interventions",
+      "index": 14,
+      "label": "Interventions and therapeutics",
+      "groupId": "action",
+      "coverage": "master",
+      "summary": "Connects prevention, medication, procedures, devices, behavior, rehabilitation, environment, policy, palliation, and implementation.",
+      "sourceCodes": ["00", "01", "02", "03A", "03B", "03C", "03D", "03E", "03F", "03G", "03H", "03I", "03J", "03K", "03L", "03M", "03N", "03O", "04"],
+      "measurementFamilies": ["Dose and exposure", "Fidelity and adherence", "Benefit and harm", "Burden", "Goal attainment"],
+      "buildTargets": ["Intervention-response graph", "Recommendation contract", "N-of-1 measurement loops"]
+    },
+    {
+      "id": "governance",
+      "index": 15,
+      "label": "Ethics, law, rights, equity, and governance",
+      "groupId": "action",
+      "coverage": "master",
+      "summary": "Makes consent, privacy, access, fairness, rights, accountability, contestability, resource allocation, and public trust visible.",
+      "sourceCodes": ["00"],
+      "measurementFamilies": ["Consent and permitted use", "Access audit", "Subgroup performance", "Disparity metrics", "Incidents and appeals"],
+      "buildTargets": ["Consent and purpose service", "Audit history", "Equity and subgroup validation gates"]
+    }
+  ],
+  "sourceMetadata": {
+    "Atlas_of_Human_Health_Unified_Taxonomy_2026.pdf": {
+      "code": "00",
+      "title": "Atlas of Human Health: Unified Taxonomy",
+      "kind": "master",
+      "branchId": "measurement-data",
+      "pageCount": 217,
+      "summary": "Defines the fifteen branches, nine axes, health-coordinate record, integrated profile, dataset entities, device taxonomy, and implementation roadmap.",
+      "measurementFamilies": ["Taxonomy", "Standards crosswalk", "Health-coordinate schema", "Evidence and uncertainty", "Device taxonomy"],
+      "initiatives": ["Core ontology and crosswalk", "Cardiovascular pilot"]
+    },
+    "01_Whole_Person_Health_States_and_Outcomes.pdf": {
+      "code": "01",
+      "title": "Whole-Person Health States and Outcomes",
+      "kind": "domain",
+      "branchId": "whole-person",
+      "pageCount": 63,
+      "summary": "Defines the outcomes every other domain should explain: risk, burden, symptoms, function, participation, well-being, resilience, and goals.",
+      "measurementFamilies": ["PROMs", "WHODAS and ICF", "Performance tests", "Ecological momentary assessment", "Goal attainment"],
+      "initiatives": ["Whole-person common outcome set", "Goal-concordant multimorbidity trial"]
+    },
+    "02_Biological_Foundations_and_Regulation.pdf": {
+      "code": "02",
+      "title": "Biological Foundations and Regulation",
+      "kind": "domain",
+      "branchId": "biological-foundations",
+      "pageCount": 61,
+      "summary": "Maps nested adaptive biology from sequence and regulation through cells, tissues, signaling, energy, repair, and aging.",
+      "measurementFamilies": ["Sequencing", "Multi-omics", "Histology", "Cellular assays", "Perturbation models"],
+      "initiatives": ["Cross-scale perturbation atlas", "Translation failure registry"]
+    },
+    "Cardiovascular_Health_and_Measurement_Engineering_2026.pdf": {
+      "code": "03A",
+      "title": "Cardiovascular Health and Measurement Engineering",
+      "kind": "system",
+      "branchId": "organ-systems",
+      "pageCount": 137,
+      "summary": "Connects cardiovascular causes, prevention, devices, signal chains, engineering controls, data architecture, and a staged research platform.",
+      "measurementFamilies": ["ECG", "Blood pressure and hemodynamics", "PPG and oximetry", "Acoustic and mechanical", "Imaging and exercise"],
+      "initiatives": ["Synchronized ECG-PPG-IMU-temperature platform", "Validated external cuff integration"]
+    },
+    "03B_Respiratory_Health_and_Measurement_Engineering.pdf": {
+      "code": "03B",
+      "title": "Respiratory Health and Measurement Engineering",
+      "kind": "system",
+      "branchId": "organ-systems",
+      "pageCount": 83,
+      "summary": "Covers ventilation, gas exchange, defense, pulmonary circulation, sleep, exercise reserve, devices, and safe respiratory engineering.",
+      "measurementFamilies": ["Oximetry and capnography", "Spirometry", "Lung volumes and diffusion", "Imaging", "Sleep and exercise testing"],
+      "initiatives": ["Respiratory digital-twin falsification", "Equity-critical oximetry study"]
+    },
+    "03C_Nervous_System_Health_and_Neurotechnology.pdf": {
+      "code": "03C",
+      "title": "Nervous System Health and Neurotechnology",
+      "kind": "system",
+      "branchId": "organ-systems",
+      "pageCount": 76,
+      "summary": "Links neural structure, electrophysiology, circulation, cognition, behavior, function, stimulation, and neurotechnology governance.",
+      "measurementFamilies": ["EEG and evoked potentials", "EMG and nerve conduction", "CT and MRI", "Cognitive assessment", "Movement and eye tracking"],
+      "initiatives": ["Multimodal event truth set", "Neurodevice continuity study"]
+    },
+    "03D_Endocrine_and_Metabolic_Health.pdf": {
+      "code": "03D",
+      "title": "Endocrine and Metabolic Health",
+      "kind": "system",
+      "branchId": "organ-systems",
+      "pageCount": 75,
+      "summary": "Treats hormones and metabolism as coupled feedback, flux, timing, reserve, laboratory, sensor, and closed-loop control systems.",
+      "measurementFamilies": ["Hormone assays", "Glucose and CGM", "Pump telemetry", "Body composition", "Calorimetry and dynamic tests"],
+      "initiatives": ["Assay harmonization atlas", "Closed-loop failure registry"]
+    },
+    "03E_Gastrointestinal_Hepatobiliary_and_Pancreatic_Health.pdf": {
+      "code": "03E",
+      "title": "Gastrointestinal, Hepatobiliary, and Pancreatic Health",
+      "kind": "system",
+      "branchId": "organ-systems",
+      "pageCount": 74,
+      "summary": "Integrates digestive physiology, liver and pancreatic function, nutrition, microbiology, symptoms, imaging, endoscopy, and ingestible devices.",
+      "measurementFamilies": ["Blood and stool assays", "Endoscopy", "Ultrasound and elastography", "Motility and reflux", "Microbiome and metabolome"],
+      "initiatives": ["Multimodal symptom-mechanism cohort", "Ingestible metrology program"]
+    },
+    "03F_Renal_and_Urinary_Health.pdf": {
+      "code": "03F",
+      "title": "Renal and Urinary Health",
+      "kind": "system",
+      "branchId": "organ-systems",
+      "pageCount": 74,
+      "summary": "Separates filtration, injury, tubular function, volume, electrolytes, urinary function, reserve, dialysis, and cardiorenal-metabolic coupling.",
+      "measurementFamilies": ["Creatinine, cystatin C, and GFR", "Urinalysis", "Imaging", "Urodynamics", "Urine-output and dialysis sensing"],
+      "initiatives": ["Nonsteady filtration model", "Fluid-status utility trial"]
+    },
+    "03G_Hematologic_Health_and_Hemostasis.pdf": {
+      "code": "03G",
+      "title": "Hematologic Health and Hemostasis",
+      "kind": "system",
+      "branchId": "organ-systems",
+      "pageCount": 64,
+      "summary": "Integrates blood-cell production and function, oxygen transport, hemostasis, thrombosis, rheology, clonal evolution, transfusion, and assay engineering.",
+      "measurementFamilies": ["CBC and morphology", "Coagulation", "Flow cytometry", "Marrow and molecular assays", "Point-of-care and continuous sensing"],
+      "initiatives": ["Multiscale hemostasis reference atlas", "Safe continuous hemoglobin platform"]
+    },
+    "03H_Immune_and_Lymphatic_Health.pdf": {
+      "code": "03H",
+      "title": "Immune and Lymphatic Health",
+      "kind": "system",
+      "branchId": "organ-systems",
+      "pageCount": 65,
+      "summary": "Models immune health as regulated defense, tolerance, repair, transport, memory, and resolution rather than a strong-versus-weak score.",
+      "measurementFamilies": ["Immune phenotype", "Antibodies and complement", "Cellular function", "Pathogen-host testing", "Lymphatic and recovery measures"],
+      "initiatives": ["Immune-state challenge atlas", "Low-burden lymphedema detector"]
+    },
+    "03I_Musculoskeletal_and_Connective_Tissue_Health.pdf": {
+      "code": "03I",
+      "title": "Musculoskeletal and Connective-Tissue Health",
+      "kind": "system",
+      "branchId": "organ-systems",
+      "pageCount": 66,
+      "summary": "Connects tissue biology and mechanics to pain, movement, function, participation, load, rehabilitation, and assistive-device design.",
+      "measurementFamilies": ["Imaging", "Force and motion", "EMG", "Gait and pressure", "Wearable load and rehabilitation sensing"],
+      "initiatives": ["Structure-pain-function cohort", "Open rehabilitation sensor stack"]
+    },
+    "03J_Integumentary_and_Dermatologic_Health.pdf": {
+      "code": "03J",
+      "title": "Integumentary and Dermatologic Health",
+      "kind": "system",
+      "branchId": "organ-systems",
+      "pageCount": 62,
+      "summary": "Integrates barrier, immunity, circulation, sensation, appearance, wound repair, imaging quality, skin-tone bias, and device safety.",
+      "measurementFamilies": ["Photography and colorimetry", "Dermoscopy", "Optical and ultrasound imaging", "Barrier and perfusion", "Wound and exposure sensing"],
+      "initiatives": ["Skin-tone-calibrated optical atlas", "Smart wound utility trial"]
+    },
+    "03K_Sensory_Health_and_Measurement.pdf": {
+      "code": "03K",
+      "title": "Sensory Health and Measurement",
+      "kind": "system",
+      "branchId": "organ-systems",
+      "pageCount": 61,
+      "summary": "Connects physical stimuli, sensory organs, neural coding, perception, adaptation, real-world function, and assistive technology.",
+      "measurementFamilies": ["Vision and retinal imaging", "Audiometry", "Vestibular and balance", "Smell and taste", "Assistive-device telemetry"],
+      "initiatives": ["Multisensory reserve atlas", "Consumer calibration layer"]
+    },
+    "03L_Oral_Dental_and_Craniofacial_Health.pdf": {
+      "code": "03L",
+      "title": "Oral, Dental, and Craniofacial Health",
+      "kind": "system",
+      "branchId": "organ-systems",
+      "pageCount": 62,
+      "summary": "Treats oral health as integral to nutrition, pain, infection, communication, airway, appearance, systemic health, and access.",
+      "measurementFamilies": ["Dental examination and imaging", "Optical scanning", "Saliva and microbiology", "Occlusion and jaw motion", "Home-device telemetry"],
+      "initiatives": ["Integrated oral-systemic cohort", "Low-cost optical caries and lesion platform"]
+    },
+    "03M_Reproductive_and_Sexual_Health.pdf": {
+      "code": "03M",
+      "title": "Reproductive and Sexual Health",
+      "kind": "system",
+      "branchId": "organ-systems",
+      "pageCount": 64,
+      "summary": "Integrates fertility, contraception, sexual function and well-being, infection, pelvic health, autonomy, relationships, and access.",
+      "measurementFamilies": ["Hormones", "Semen analysis", "Ultrasound", "Fertility tracking", "Sexual and pelvic function"],
+      "initiatives": ["Couple-level fertility model", "Privacy-preserving reproductive sensor standard"]
+    },
+    "03N_Maternal_Fetal_and_Perinatal_Health.pdf": {
+      "code": "03N",
+      "title": "Maternal, Fetal, and Perinatal Health",
+      "kind": "system",
+      "branchId": "organ-systems",
+      "pageCount": 64,
+      "summary": "Models pregnancy as a coupled maternal-placental-fetal system through preconception, gestation, birth, postpartum, and neonatal transition.",
+      "measurementFamilies": ["Maternal vital and biomarker monitoring", "Ultrasound and Doppler", "Fetal monitoring", "Labor and blood-loss measures", "Neonatal monitoring"],
+      "initiatives": ["Placenta-maternal-fetal digital twin", "Bias-resistant maternal early-warning system"]
+    },
+    "03O_Integrated_Homeostatic_Systems.pdf": {
+      "code": "03O",
+      "title": "Integrated Homeostatic Systems",
+      "kind": "system",
+      "branchId": "organ-systems",
+      "pageCount": 65,
+      "summary": "Explains cross-organ stability, adaptive regulation, reserve under challenge, decompensation, and recovery rather than static normality.",
+      "measurementFamilies": ["Vital signs and fluids", "Electrolytes and gases", "Temperature", "Challenge and autonomic testing", "Multimodal wearables"],
+      "initiatives": ["Open multimodal challenge dataset", "Closed-loop safety benchmark"]
+    },
+    "04_Cross_System_Pathological_Processes.pdf": {
+      "code": "04",
+      "title": "Cross-System Pathological Processes",
+      "kind": "domain",
+      "branchId": "pathological-processes",
+      "pageCount": 61,
+      "summary": "Organizes mechanisms that cross specialty boundaries by causal process, temporal phase, organ distribution, and functional outcome.",
+      "measurementFamilies": ["Serial organ panels", "Point-of-care and whole-body imaging", "Inflammation and coagulation", "Integrated pathology", "Recovery sensing"],
+      "initiatives": ["Cross-organ acute-illness atlas", "Mechanism-to-function trial standard"]
+    }
+  },
+  "programs": [
+    {
+      "id": "knowledge-registry",
+      "title": "Atlas knowledge registry",
+      "lane": "software",
+      "stage": "now",
+      "summary": "Version the sources, branches, axes, measurement families, gaps, and build targets as queryable data.",
+      "deliverables": ["Catalog API", "Interactive atlas", "Source checksums", "Skill discovery"],
+      "sourceCodes": ["00"]
+    },
+    {
+      "id": "observation-envelope",
+      "title": "Longitudinal observation envelope",
+      "lane": "data",
+      "stage": "next",
+      "summary": "Create the append-only event contract for clinical, document, device, self-report, and environment observations.",
+      "deliverables": ["Typed observation schema", "Temporal and missingness semantics", "Provenance lineage", "Consent and access fields"],
+      "sourceCodes": ["00", "01"]
+    },
+    {
+      "id": "cardiovascular-pilot",
+      "title": "Cardiovascular research pilot",
+      "lane": "research",
+      "stage": "next",
+      "summary": "Use cardiovascular health as the first deep domain to validate registry, device, protocol, profile, and dataset contracts.",
+      "deliverables": ["Measurement registry", "Protocol schema", "Patient-facing trajectory", "Validation dataset"],
+      "sourceCodes": ["03A"]
+    },
+    {
+      "id": "reference-acquisition",
+      "title": "Safe reference acquisition stack",
+      "lane": "hardware",
+      "stage": "next",
+      "summary": "Begin with synchronized, battery-powered raw ECG, PPG, IMU, and temperature plus a validated external cuff and simulator-first testing.",
+      "deliverables": ["Raw waveform format", "Clock and calibration tests", "Signal-quality dashboard", "Documented failure modes"],
+      "sourceCodes": ["03A"]
+    },
+    {
+      "id": "quality-engine",
+      "title": "Quality and provenance engine",
+      "lane": "software",
+      "stage": "next",
+      "summary": "Make artifact, calibration, reference, missingness, transformation, algorithm version, and uncertainty first-class data.",
+      "deliverables": ["Quality rules", "Lineage graph", "Abstention behavior", "Audit-ready evidence bundle"],
+      "sourceCodes": ["00", "03A"]
+    },
+    {
+      "id": "profile-graph",
+      "title": "Multi-axial profile graph",
+      "lane": "software",
+      "stage": "later",
+      "summary": "Connect observations, concepts, mechanisms, function, goals, interventions, and care context without flattening uncertainty.",
+      "deliverables": ["Health-coordinate instances", "Typed relationships", "Eight-layer read model", "Next-information planning"],
+      "sourceCodes": ["00", "01", "04"]
+    },
+    {
+      "id": "narrow-claims",
+      "title": "Narrow validated claims",
+      "lane": "research",
+      "stage": "later",
+      "summary": "Advance one intended use at a time from bench verification through analytical validity, clinical validity, utility, and surveillance.",
+      "deliverables": ["Locked intended-use contract", "Independent validation", "Subgroup performance", "Human-factors evidence"],
+      "sourceCodes": ["00", "03A"]
+    },
+    {
+      "id": "governance-ledger",
+      "title": "Consent, claims, and governance ledger",
+      "lane": "governance",
+      "stage": "next",
+      "summary": "Bind every use and user-facing health claim to permitted purpose, evidence, version, review status, and accountability.",
+      "deliverables": ["Consent purpose model", "Evidence claim records", "Access audit", "Correction and appeal path"],
+      "sourceCodes": ["00"]
+    }
+  ]
+}

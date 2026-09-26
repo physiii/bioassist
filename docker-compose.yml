@@ -21,11 +21,13 @@ services:
       api:
         condition: service_healthy
     environment:
-      - VITE_PROXY_TARGET=http://api:4000
+      - API_UPSTREAM=http://api:4000
     ports:
-      - "15173:5173"
+      - "15173:80"
+    labels:
+      com.custodian.app.url: "http://192.168.1.40:15173/#"
     healthcheck:
-      test: ["CMD", "node", "-e", "require('http').get('http://localhost:5173', (r) => process.exit(r.statusCode >= 200 && r.statusCode < 500 ? 0 : 1))"]
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1/healthz || exit 1"]
       interval: 15s
       timeout: 5s
       retries: 3

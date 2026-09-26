@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
@@ -10,6 +10,11 @@ RUN npm ci
 
 COPY . .
 
-EXPOSE 5173
+RUN npm run build -w apps/web
 
-CMD ["npm", "run", "dev", "-w", "apps/web", "--", "--host", "0.0.0.0", "--port", "5173"]
+FROM nginx:alpine
+
+COPY --from=build /app/apps/web/dist /usr/share/nginx/html
+COPY apps/web/nginx.conf.template /etc/nginx/templates/default.conf.template
+
+EXPOSE 80

@@ -15,18 +15,8 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { appRoutes } from "../appRoutes";
 import { useAuth } from "../auth/AuthContext";
-
-const navItems = [
-  { label: "Home", path: "/" },
-  { label: "Timeline", path: "/timeline" },
-  { label: "Insights", path: "/insights" },
-  { label: "Plan", path: "/plan" },
-  { label: "Documents", path: "/documents" },
-  { label: "Devices", path: "/devices" },
-  { label: "Learn", path: "/learn" },
-  { label: "Settings", path: "/settings" }
-];
 
 export function AppShell() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -63,7 +53,7 @@ export function AppShell() {
           </Box>
           <Divider />
           <List sx={{ px: 1, pt: 1 }}>
-            {navItems.map((item) => (
+            {appRoutes.map((item) => (
               <ListItemButton
                 key={item.path}
                 selected={location.pathname === item.path}
